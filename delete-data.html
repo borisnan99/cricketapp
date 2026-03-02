@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Delete Your Data – Cricket League App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #1a4731;
+      --gold: #c9a84c;
+      --cream: #fdf8f0;
+      --text: #2c2c2c;
+      --muted: #6b6b6b;
+      --border: #e8dfc8;
+      --red: #c0392b;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    header {
+      background: var(--green);
+      color: white;
+      padding: 60px 40px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(255,255,255,0.02) 40px,
+        rgba(255,255,255,0.02) 80px
+      );
+    }
+
+    header .badge {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    header p {
+      color: rgba(255,255,255,0.6);
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 60px 40px 100px;
+    }
+
+    .intro {
+      border-left: 3px solid var(--gold);
+      padding: 20px 24px;
+      background: white;
+      margin-bottom: 50px;
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    section {
+      margin-bottom: 44px;
+      padding-bottom: 44px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-child { border-bottom: none; }
+
+    p { margin-bottom: 12px; font-size: 15px; }
+    p:last-child { margin-bottom: 0; }
+
+    /* Step cards */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      background: white;
+      border: 1px solid var(--border);
+      padding: 20px 24px;
+    }
+
+    .step-number {
+      background: var(--green);
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-content strong {
+      display: block;
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .step-content span {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* What gets deleted */
+    .delete-list {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0;
+    }
+
+    .delete-list li {
+      font-size: 15px;
+      padding: 8px 0 8px 28px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .delete-list li:last-child { border-bottom: none; }
+
+    .delete-list li::before {
+      content: '✕';
+      position: absolute;
+      left: 0;
+      color: var(--red);
+      font-size: 12px;
+      top: 10px;
+    }
+
+    /* Contact box */
+    .contact-box {
+      background: var(--green);
+      color: white;
+      padding: 30px 32px;
+      margin-top: 16px;
+    }
+
+    .contact-box p { color: rgba(255,255,255,0.8); margin-bottom: 6px; }
+    .contact-box a { color: var(--gold); }
+
+    .warning-box {
+      background: #fff8f0;
+      border: 1px solid #f0c080;
+      border-left: 4px solid var(--gold);
+      padding: 16px 20px;
+      font-size: 14px;
+      color: #7a5a20;
+      margin-top: 16px;
+    }
+
+    a { color: var(--green); }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 600px) {
+      main { padding: 40px 24px 60px; }
+      header { padding: 40px 24px 36px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Your Rights</div>
+  <h1>Delete Your Data</h1>
+  <p>Cricket League App &nbsp;·&nbsp; Data Deletion Request</p>
+</header>
+
+<main>
+
+  <div class="intro">
+    You have the right to request deletion of your personal data at any time. Follow the steps below to delete your account and all associated data from the Cricket League App.
+  </div>
+
+  <section>
+    <h2>Option 1 — Delete from the App</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <strong>Open the Cricket League App</strong>
+          <span>Make sure you are logged in to your account.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <strong>Go to your Profile</strong>
+          <span>Tap the profile icon or navigate to the Account section.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <strong>Open Settings</strong>
+          <span>Tap the Settings or gear icon within your profile.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <strong>Tap "Delete Account"</strong>
+          <span>Scroll to the bottom and tap Delete Account. Confirm when prompted.</span>
+        </div>
+      </div>
+    </div>
+    <div class="warning-box">
+      ⚠️ This action is permanent and cannot be undone. All your data will be deleted within 30 days.
+    </div>
+  </section>
+
+  <section>
+    <h2>Option 2 — Submit a Request by Email</h2>
+    <p>If you are unable to access the app or prefer to submit a request manually, email us and we will delete your account within 30 days.</p>
+    <div class="contact-box">
+      <p>Send your deletion request to:</p>
+      <p><a href="mailto:privacy@cricketleagueapp.com">privacy@cricketleagueapp.com</a></p>
+      <p style="margin-top:12px; font-size:13px;">Please include your full name and the email address associated with your account so we can locate and delete your data.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>What Gets Deleted</h2>
+    <p>When your account is deleted, the following personal data is permanently removed:</p>
+    <ul class="delete-list">
+      <li>Your name</li>
+      <li>Your email address</li>
+      <li>Your phone number</li>
+      <li>Your account profile and settings</li>
+      <li>Any content or activity associated with your account</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>How Long Does It Take</h2>
+    <p>Account deletion is processed within <strong>30 days</strong> of your request. You will receive a confirmation email once your data has been fully removed.</p>
+    <p>In some cases we may be required by law to retain certain information for a limited period. Any such data will be held securely and not used for any other purpose.</p>
+  </section>
+
+  <section>
+    <h2>Questions</h2>
+    <p>If you have any questions about data deletion or your privacy rights, please contact us:</p>
+    <div class="contact-box">
+      <p>Cricket League App — Privacy Enquiries</p>
+      <p>Email: <a href="mailto:privacy@cricketleagueapp.com">privacy@cricketleagueapp.com</a></p>
+      <p>Country: United Kingdom</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 Cricket League App · All rights reserved &nbsp;·&nbsp; <a href="privacy-policy.html">Privacy Policy</a>
+</footer>
+
+</body>
+</html>
